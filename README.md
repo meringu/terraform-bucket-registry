@@ -27,7 +27,7 @@ Download the latest release from https://github.com/meringu/terraform-bucket-reg
 
 ## Usage
 
-1. Create a bucket website. For example let's pretend we have provisioned an AWS S3 bucket called `my-terraform-registry` to serve content at `https://my-terraform-registry.com`
+1. Create a bucket website. For example let's pretend we have provisioned an AWS S3 bucket called `my-terraform-registry` to serve content at `https://my-terraform-registry.com`.
 
 1. Create a GPG key for signing. You may also use an existing key.
 
@@ -35,7 +35,7 @@ Download the latest release from https://github.com/meringu/terraform-bucket-reg
     gpg --gen-key
     ```
 
-1. Export the GPG public key
+1. Export the GPG public key.
 
     ```
     gpg --armor --export --output key.asc firstname.lastname@example.com
@@ -99,7 +99,7 @@ Download the latest release from https://github.com/meringu/terraform-bucket-reg
         --gpg-public-key-file key.asc
     ```
 
-1. Use the provider in Terraform. For the provider `foo` in the `bar` namespace:
+1. Use the provider in Terraform. The following is for a provider `foo` in the `bar` namespace.
 
     ```hcl
     terraform {
@@ -120,13 +120,13 @@ Download the latest release from https://github.com/meringu/terraform-bucket-reg
 There is an end-to-end example implemented with `docker-compose`.
 
 This example does the following:
-- Build an example Terraform Provider
-- Create a GPG key
-- Use GoReleaser to build, package, and sign the provider
-- Create SSL certificates
-- Run the terraform-bucket-registry server
-- Publish the provider to the registry
-- Init and apply example Terraform using the terraform-bucket-registry server
+- Build an example Terraform Provider.
+- Create a GPG key.
+- Use GoReleaser to build, package, and sign the provider.
+- Create SSL certificates.
+- Run the terraform-bucket-registry server.
+- Publish the provider to the registry.
+- Init and apply example Terraform using the terraform-bucket-registry server.
 
 ```
 docker-compose -f examples/terraform-provider-example/docker-compose.yaml build
