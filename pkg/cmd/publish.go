@@ -143,7 +143,7 @@ func publish() error {
 			Shasum:              shasum,
 			SigningKeys: &api.SigningKeys{
 				GPGPublicKeys: []*api.GPGPublicKey{
-					&api.GPGPublicKey{
+					{
 						KeyID:          publishGPGKeyID,
 						ASCIIArmor:     string(pubkey),
 						TrustSignature: "",

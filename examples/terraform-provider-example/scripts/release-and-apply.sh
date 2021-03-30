@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-VERSION=0.1.0
+VERSION=0.0.1
 
 cd "$(dirname "$0")/.."
 

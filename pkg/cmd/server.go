@@ -75,29 +75,40 @@ func (s *server) cleanup() {
 }
 
 func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	entry := logrus.WithField("request_uri", r.RequestURI)
+	entry = entry.WithField("handler", "bucket")
 	reader, err := s.bucket.NewReader(r.Context(), r.RequestURI, nil)
 	if err != nil {
 		if gcerrors.Code(err) == gcerrors.NotFound {
+			entry = entry.WithField("status", http.StatusNotFound)
 			w.WriteHeader(http.StatusNotFound)
-			w.Write([]byte("Not Found"))
-			logrus.Info("404 - %s", r.RequestURI)
-			return
+			_, err := w.Write([]byte("Not Found"))
+			if err != nil {
+				logrus.Error(err)
+			}
+		} else {
+			logrus.Error(err)
+
+			entry = entry.WithField("status", http.StatusInternalServerError)
+			w.WriteHeader(http.StatusInternalServerError)
+			_, err := w.Write([]byte(err.Error()))
+			if err != nil {
+				logrus.Error(err)
+			}
 		}
-		logrus.Error(err)
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
-		logrus.Info("500 - %s", r.RequestURI)
-		return
-	}
-	defer reader.Close()
-
-	w.Header().Set("Content-Type", reader.ContentType())
-	w.WriteHeader(http.StatusOK)
-
-	_, err = io.Copy(w, reader)
-	if err != nil {
-		logrus.Error(err)
 	} else {
-		logrus.Info("200 - %s", r.RequestURI)
+		defer reader.Close()
+
+		entry = entry.WithField("status", http.StatusOK)
+
+		w.Header().Set("Content-Type", reader.ContentType())
+		w.WriteHeader(http.StatusOK)
+
+		_, err = io.Copy(w, reader)
+		if err != nil {
+			logrus.Error(err)
+		}
 	}
+
+	entry.Info("finished response")
 }
