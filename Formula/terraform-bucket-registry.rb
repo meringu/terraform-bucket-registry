@@ -5,28 +5,28 @@
 class TerraformBucketRegistry < Formula
   desc ""
   homepage "https://github.com/meringu/terraform-bucket-registry"
-  version "0.1.0"
+  version "0.1.1"
   bottle :unneeded
 
   if OS.mac? && Hardware::CPU.intel?
-    url "https://github.com/meringu/terraform-bucket-registry/releases/download/v0.1.0/terraform-bucket-registry_0.1.0_darwin_amd64.tar.gz"
-    sha256 "fe06022a9829fed00d59301b8ed1e8bc78fb030bcdc4d5c4762cd1d6134a0ffc"
+    url "https://github.com/meringu/terraform-bucket-registry/releases/download/v0.1.1/terraform-bucket-registry_0.1.1_darwin_amd64.tar.gz"
+    sha256 "338976baeb8a5d122cbed74e1e9edaf33a44c157dbb81c8194d3139fb2f96d2a"
   end
   if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/meringu/terraform-bucket-registry/releases/download/v0.1.0/terraform-bucket-registry_0.1.0_darwin_arm64.tar.gz"
-    sha256 "b167830dd76fb5e33b0c6d4471aa2775ecc87c8b4c3049dacb78ed94a8a4b52a"
+    url "https://github.com/meringu/terraform-bucket-registry/releases/download/v0.1.1/terraform-bucket-registry_0.1.1_darwin_arm64.tar.gz"
+    sha256 "0a2a784523e3be418f02bccceecfa3fb72297664622680a4d37034728cef0d29"
   end
   if OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/meringu/terraform-bucket-registry/releases/download/v0.1.0/terraform-bucket-registry_0.1.0_linux_amd64.tar.gz"
-    sha256 "b8f9cc5d5e79bbc4fb695ee752938456c20f312394f01d521f95c3768fb065fd"
+    url "https://github.com/meringu/terraform-bucket-registry/releases/download/v0.1.1/terraform-bucket-registry_0.1.1_linux_amd64.tar.gz"
+    sha256 "d4d28f0c49c211908dc7d50525bddd76aad8d339656ba7e0bf510b7c38b6e4a8"
   end
   if OS.linux? && Hardware::CPU.arm? && !Hardware::CPU.is_64_bit?
-    url "https://github.com/meringu/terraform-bucket-registry/releases/download/v0.1.0/terraform-bucket-registry_0.1.0_linux_armv6.tar.gz"
-    sha256 "dd42ffc9f6a59bc52efab05b7ba019511269c80848a90eebd41c63eca062c10c"
+    url "https://github.com/meringu/terraform-bucket-registry/releases/download/v0.1.1/terraform-bucket-registry_0.1.1_linux_armv6.tar.gz"
+    sha256 "65697b9f243a3fa986a135fc3a2f4fa376a1ef8bc6635227c21a729b220d7e0e"
   end
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-    url "https://github.com/meringu/terraform-bucket-registry/releases/download/v0.1.0/terraform-bucket-registry_0.1.0_linux_arm64.tar.gz"
-    sha256 "64166a6412ba2119662660a791dd98242ad211a0bf3a8512bb79ac27cd65cb7e"
+    url "https://github.com/meringu/terraform-bucket-registry/releases/download/v0.1.1/terraform-bucket-registry_0.1.1_linux_arm64.tar.gz"
+    sha256 "0573c896a79439fffc3bb6f9825f60caa74f0a969936a6de552aaf874b266983"
   end
 
   def install
