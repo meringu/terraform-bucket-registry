@@ -1,0 +1,11 @@
+{
+    "CN": "registry",
+    "key": {
+        "algo": "rsa",
+        "size": 2048
+    },
+    "hosts": [
+        "registry",
+        "localhost"
+    ]
+}

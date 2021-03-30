@@ -1,0 +1,7 @@
+dist/
+out/
+.terraform/
+.terraformrc
+terraform.rc
+terraform
+public.pgp

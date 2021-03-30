@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+  ssl:
+    image: cfssl/cfssl
+    working_dir: /etc/ssl/registry
+    entrypoint: sh
+    command: -c /usr/local/src/examples/terraform-provider-example/scripts/create-ssl.sh
+    volumes:
+      -  ../..:/usr/local/src/
+      - ssl:/etc/ssl/registry
+  registry:
+    build:  ../..
+    command: server --bucket-url=file:///var/lib/bucket --tls-private-key /etc/ssl/registry/server-key.pem --tls-public-key /etc/ssl/registry/server.pem
+    environment:
+      - AWS_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=minioadmin
+      - AWS_SECRET_ACCESS_KEY=minioadmin
+    ports:
+      - 4443:443
+    volumes:
+      - bucket:/var/lib/bucket
+      - ssl:/etc/ssl/registry
+    depends_on:
+      - ssl
+      # TODO: this condition hasn't been released with docker-compose yet
+      # ssl:
+      #   condition: service_completed_successfully
+  goreleaser:
+    image: goreleaser/goreleaser
+    entrypoint: ./examples/terraform-provider-example/scripts/release-and-apply.sh
+    environment:
+      - AWS_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=minioadmin
+      - AWS_SECRET_ACCESS_KEY=minioadmin
+    working_dir: /go/src/github.com/meringu/terraform-bucket-registry
+    volumes:
+      - ../..:/go/src/github.com/meringu/terraform-bucket-registry
+      - bucket:/var/lib/bucket
+      - ssl:/etc/ssl/registry
+
+volumes:
+  bucket:
+  ssl:
