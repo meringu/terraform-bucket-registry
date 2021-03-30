@@ -99,6 +99,22 @@ Download the latest release from https://github.com/meringu/terraform-bucket-reg
         --gpg-public-key-file key.asc
     ```
 
+1. Use the provider in Terraform. For the provider `foo` in the `bar` namespace:
+
+    ```hcl
+    terraform {
+      required_providers {
+        foo = {
+          source  = "my-terraform-registry.com/bar/foo"
+        }
+      }
+    }
+
+    provider "foo" {}
+    ```
+
+1. Profit
+
 ## Example
 
 There is an end-to-end example implemented with `docker-compose`.
