@@ -5,3 +5,6 @@ out/
 terraform.rc
 terraform
 public.pgp
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup

@@ -116,5 +116,3 @@ This example does the following:
 docker-compose -f examples/terraform-provider-example/docker-compose.yaml build
 docker-compose -f examples/terraform-provider-example/docker-compose.yaml up
 ```
-
-Until docker-compose can represent dependencies on containers finishing you may need to run the up command twice.

@@ -11,6 +11,7 @@ services:
       - ssl:/etc/ssl/registry
   registry:
     build:  ../..
+    restart: on-failure
     command: server --bucket-url=file:///var/lib/bucket --tls-private-key /etc/ssl/registry/server-key.pem --tls-public-key /etc/ssl/registry/server.pem
     environment:
       - AWS_REGION=us-east-1
@@ -23,7 +24,8 @@ services:
       - ssl:/etc/ssl/registry
     depends_on:
       - ssl
-      # TODO: this condition hasn't been released with docker-compose yet
+      # TODO: This condition hasn't been released with docker-compose yet.
+      #       Restart policy is used as a workaround.
       # ssl:
       #   condition: service_completed_successfully
   goreleaser:
