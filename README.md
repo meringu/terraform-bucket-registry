@@ -10,7 +10,7 @@ See https://www.terraform.io/docs/internals/provider-registry-protocol.html for 
 - Your Terraform providers aren't fit to share on the public Terraform Registry.
 - You want to distribute your Terraform providers with semantic versioning support.
 - You want to manage the installation of your Terraform providers during `terraform init`.
-- You have access to AWS S3, Azure blob, GCP Cloud Storage, or similar APIs for hosting.static websites.
+- You have access to AWS S3, Azure blob, GCP Cloud Storage, or similar APIs for hosting static websites.
 
 ## Installation
 
@@ -31,11 +31,15 @@ Download the latest release from https://github.com/meringu/terraform-bucket-reg
 
 1. Create a GPG key for signing. You may also use an existing key.
 
+    ```
     gpg --gen-key
+    ```
 
 1. Export the GPG public key
 
+    ```
     gpg --armor --export --output key.asc firstname.lastname@example.com
+    ```
 
 2. Build your Terraform provider. The following [GoReleaser](https://github.com/goreleaser/goreleaser) config can be used as a starting point. This will build the provider into the `dist/` folder.
 
