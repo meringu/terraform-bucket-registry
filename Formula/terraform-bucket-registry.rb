@@ -6,7 +6,6 @@ class TerraformBucketRegistry < Formula
   desc ""
   homepage "https://github.com/meringu/terraform-bucket-registry"
   version "0.1.1"
-  bottle :unneeded
 
   if OS.mac? && Hardware::CPU.intel?
     url "https://github.com/meringu/terraform-bucket-registry/releases/download/v0.1.1/terraform-bucket-registry_0.1.1_darwin_amd64.tar.gz"
