@@ -17,7 +17,7 @@ See https://www.terraform.io/docs/internals/provider-registry-protocol.html for 
 ### MacOS
 
 ```
-brew tap meringu/terraform-bucket-registry
+brew tap meringu/terraform-bucket-registry https://github.com/meringu/terraform-bucket-registry
 brew install terraform-bucket-registry
 ```
 
