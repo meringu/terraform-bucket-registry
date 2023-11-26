@@ -33,10 +33,6 @@ var publishGPGKeyID string
 var publishGPGPublicKeyFile string
 
 const discoveryPath = ".well-known/terraform.json"
-const discoveryContent = `{
-	"providers.v1": "/v1/providers/"
-}
-`
 
 func init() {
 	publishCmd.PersistentFlags().StringVar(&publishName, "name", "", "name of the Terraform provider to publish")
@@ -96,8 +92,18 @@ func publish() error {
 	defer bucket.Close()
 
 	// Write discovery
+	discoveryContent, err := bucket.ReadAll(ctx, discoveryPath)
+	if err != nil {
+		return err
+	}
+
+	discoveryContent, err = setDiscoveryProvider(discoveryContent)
+	if err != nil {
+		return err
+	}
+
 	logrus.Infof("Uploading %s", discoveryPath)
-	bucket.WriteAll(ctx, discoveryPath, []byte(discoveryContent), &blob.WriterOptions{ContentType: "application/json"})
+	bucket.WriteAll(ctx, discoveryPath, discoveryContent, &blob.WriterOptions{ContentType: "application/json"})
 
 	pubkey, err := os.ReadFile(publishGPGPublicKeyFile)
 	if err != nil {
@@ -316,4 +322,21 @@ func shasumFor(file, shasumsFile string) (string, error) {
 		}
 	}
 	return "", fmt.Errorf("Couldn't match shasum for %s", file)
+}
+
+func setDiscoveryProvider(blob []byte) ([]byte, error) {
+	var content map[string]interface{}
+	err := json.Unmarshal(blob, &content)
+	if err != nil {
+		return nil, err
+	}
+
+	content["providers.v1"] = "/v1/providers/"
+
+	output, err := json.Marshal(content)
+	if err != nil {
+		return nil, err
+	}
+
+	return output, nil
 }
