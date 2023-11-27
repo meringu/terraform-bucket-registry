@@ -26,7 +26,7 @@ services:
     depends_on:
       ssl:
         condition: service_completed_successfully
-  goreleaser:
+  test:
     image: goreleaser/goreleaser
     entrypoint: ./examples/terraform-provider-example/scripts/release-and-apply.sh
     environment:

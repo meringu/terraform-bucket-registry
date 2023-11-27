@@ -130,5 +130,5 @@ This example does the following:
 
 ```
 docker compose -f examples/terraform-provider-example/docker-compose.yaml build
-docker compose -f examples/terraform-provider-example/docker-compose.yaml up
+docker compose -f examples/terraform-provider-example/docker-compose.yaml up test
 ```
