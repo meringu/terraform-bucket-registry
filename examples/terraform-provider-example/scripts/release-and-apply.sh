@@ -32,6 +32,7 @@ gpg --output $GPG_PUBLIC_KEY_FILE --armor --export --batch
 
 
 # Prep repo
+git config --global --add safe.directory "$(pwd)"
 git init
 git branch -m main
 git config user.email "you@example.com"
