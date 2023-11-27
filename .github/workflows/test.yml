@@ -19,3 +19,4 @@ jobs:
           up-flags: --build
           down-flags: -v
           test-container: test
+          test-command: ./examples/terraform-provider-example/scripts/release-and-apply.sh
