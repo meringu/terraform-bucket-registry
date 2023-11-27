@@ -129,6 +129,6 @@ This example does the following:
 - Init and apply example Terraform using the terraform-bucket-registry server.
 
 ```
-docker-compose -f examples/terraform-provider-example/docker-compose.yaml build
-docker-compose -f examples/terraform-provider-example/docker-compose.yaml up
+docker compose -f examples/terraform-provider-example/docker-compose.yaml build
+docker compose -f examples/terraform-provider-example/docker-compose.yaml up
 ```

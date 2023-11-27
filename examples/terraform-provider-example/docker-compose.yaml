@@ -23,11 +23,8 @@ services:
       - bucket:/var/lib/bucket
       - ssl:/etc/ssl/registry
     depends_on:
-      - ssl
-      # TODO: This condition hasn't been released with docker-compose yet.
-      #       Restart policy is used as a workaround.
-      # ssl:
-      #   condition: service_completed_successfully
+      ssl:
+        condition: service_completed_successfully
   goreleaser:
     image: goreleaser/goreleaser
     entrypoint: ./examples/terraform-provider-example/scripts/release-and-apply.sh

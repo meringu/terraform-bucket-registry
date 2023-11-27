@@ -8,9 +8,7 @@ cd "$(dirname "$0")/.."
 rm -rf .git/ dist/
 
 # GPG
-if ! command -v gpg > /dev/null; then
-    apk add --no-cache gnupg
-fi
+apk add --no-cache gnupg
 
 if ! gpg --armor --list-keys --batch you@example.com; then
     cat | gpg --batch --gen-key <<EOF
@@ -62,7 +60,7 @@ terraform-bucket-registry publish \
 popd
 
 if ! command -v terraform > /dev/null; then
-    curl https://releases.hashicorp.com/terraform/0.14.9/terraform_0.14.9_linux_amd64.zip > /tmp/terraform.zip
+    curl https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_amd64.zip > /tmp/terraform.zip
     unzip /tmp/terraform.zip
     mv terraform /usr/local/bin/terraform
 fi
