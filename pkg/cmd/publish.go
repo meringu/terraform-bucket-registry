@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -104,10 +105,13 @@ func publish() error {
 		}
 		defer discoveryReader.Close()
 
-		_, err = discoveryReader.Read(discoveryContent)
+		var b bytes.Buffer
+		_, err = io.Copy(io.Writer(&b), discoveryReader)
 		if err != nil {
 			return err
 		}
+
+		discoveryContent = b.Bytes()
 	}
 
 	discoveryContent, err = setDiscoveryProvider(discoveryContent)
