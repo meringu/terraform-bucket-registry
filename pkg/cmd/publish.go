@@ -91,10 +91,23 @@ func publish() error {
 	}
 	defer bucket.Close()
 
-	// Write discovery
-	discoveryContent, err := bucket.ReadAll(ctx, discoveryPath)
+	discoveryExists, err := bucket.Exists(ctx, discoveryPath)
 	if err != nil {
 		return err
+	}
+
+	discoveryContent := []byte(`{}`)
+	if discoveryExists {
+		discoveryReader, err := bucket.NewReader(ctx, discoveryPath, &blob.ReaderOptions{})
+		if err != nil {
+			return err
+		}
+		defer discoveryReader.Close()
+
+		_, err = discoveryReader.Read(discoveryContent)
+		if err != nil {
+			return err
+		}
 	}
 
 	discoveryContent, err = setDiscoveryProvider(discoveryContent)
