@@ -33,9 +33,9 @@ gpg --output $GPG_PUBLIC_KEY_FILE --armor --export --batch
 
 # Prep repo
 git init
+git branch -m main
 git config user.email "you@example.com"
 git config user.name "Your Name"
-git config init.defaultBranch main
 git remote add origin git@github.com:foo/terraform-provider-example.git
 git add -A
 git commit -am "init"
