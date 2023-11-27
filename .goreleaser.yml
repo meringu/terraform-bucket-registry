@@ -19,8 +19,10 @@ builds:
     ignore:
       - goos: darwin
         goarch: "386"
+      - goos: windows
+        goarch: "arm64"
 brews:
-  - tap:
+  - repository:
       owner: meringu
       name: terraform-bucket-registry
     commit_author:
