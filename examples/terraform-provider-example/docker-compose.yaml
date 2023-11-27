@@ -28,7 +28,8 @@ services:
         condition: service_completed_successfully
   test:
     image: goreleaser/goreleaser
-    entrypoint: ./examples/terraform-provider-example/scripts/release-and-apply.sh
+    entrypoint: sh
+    command: -c 'sleep infinity'
     environment:
       - AWS_REGION=us-east-1
       - AWS_ACCESS_KEY_ID=minioadmin

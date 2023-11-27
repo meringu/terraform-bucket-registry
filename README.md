@@ -117,7 +117,7 @@ Download the latest release from https://github.com/meringu/terraform-bucket-reg
 
 ## Example
 
-There is an end-to-end example implemented with `docker-compose`.
+There is an end-to-end example implemented with `docker-compose`. This runs on every push to a branch in GitHub actions.
 
 This example does the following:
 - Build an example Terraform Provider.
@@ -128,7 +128,10 @@ This example does the following:
 - Publish the provider to the registry.
 - Init and apply example Terraform using the terraform-bucket-registry server.
 
+To run the test locally:
+
 ```
 docker compose -f examples/terraform-provider-example/docker-compose.yaml build
-docker compose -f examples/terraform-provider-example/docker-compose.yaml up test
+docker compose -f examples/terraform-provider-example/docker-compose.yaml up -d
+docker compose -f examples/terraform-provider-example/docker-compose.yaml exec test ./examples/terraform-provider-example/scripts/release-and-apply.sh
 ```

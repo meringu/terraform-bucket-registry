@@ -6,7 +6,7 @@ on:
       - '**'
 
 jobs:
-  goreleaser:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -22,3 +22,17 @@ jobs:
         with:
           version: latest
           args: release --snapshot --clean
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: adambirds/docker-compose-action@v1.3.0
+        with:
+          compose-file: ./examples/terraform-provider-example/docker-compose.yaml
+          services: |
+            ssl
+            registry
+          up-flags: --build
+          down-flags: -v
+          test-container: test
+          test-command: ./examples/terraform-provider-example/scripts/release-and-apply.sh
